@@ -52,7 +52,7 @@ export function Earth(props) {
           side={THREE.DoubleSide}
         />
       </mesh>
-      {data.users.map((satellite, i) => <mesh
+      {data.satellites.map((satellite, i) => <mesh
         key={satellite.id}
         ref={el => satellitesRef.current[i] = el}
         position={[satellite.coordinate.x, satellite.coordinate.y, satellite.coordinate.z]}>
