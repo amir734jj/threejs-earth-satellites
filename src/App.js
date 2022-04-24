@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import styled from "styled-components";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
@@ -11,8 +12,8 @@ const CanvasContainer = styled.div`
 
 function App() {
   return (
-    <CanvasContainer>
-      <Canvas>
+    <CanvasContainer s>
+      <Canvas camera={{ zoom: 1, position: [1000, 0, 0] }} frameloop="demand">
         <Suspense fallback={null}>
           <Earth />
         </Suspense>
