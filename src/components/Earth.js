@@ -33,7 +33,7 @@ export function Earth(props) {
   return (
     <>
       <ambientLight intensity={1} />
-      <pointLight color="#f6f3ea" position={[2, 0, 5]} intensity={1.2} />
+      <pointLight color="#f6f3ea" position={[5000, 0, 5]} intensity={1.2} />
       <Stars
         radius={30000}
         depth={60}
@@ -47,25 +47,24 @@ export function Earth(props) {
         <meshPhongMaterial
           map={cloudsMap}
           opacity={0.1}
-          depthWrite={true}
           transparent={true}
           side={THREE.DoubleSide}
         />
       </mesh>
-      {data.satellites.map((satellite, i) => <mesh
-        key={satellite.id}
+      {data.satellites.map(({ satellite: { coordinate: { x, y, z }, id } }, i) => <mesh
+        key={id}
         ref={el => satellitesRef.current[i] = el}
-        position={[satellite.coordinate.x, satellite.coordinate.y, satellite.coordinate.z]}>
+        position={[x, y, z]}>
         <sphereGeometry args={[0.1, 32, 32]} />
         <meshPhongMaterial
           color='red'
           side={THREE.DoubleSide}
         />
       </mesh>)}
-      {data.users.map((user, i) => <mesh
-        key={user.id}
+      {data.satellites.map(({ satellite: { coordinate: { x, y, z }, id } }, i) => <mesh
+        key={id}
         ref={el => usersRef.current[i] = el}
-        position={[user.coordinate.x, user.coordinate.y, user.coordinate.z]}>
+        position={[x, y, z]}>
         <sphereGeometry args={[0.1, 32, 32]} />
         <meshPhongMaterial
           color='green'
