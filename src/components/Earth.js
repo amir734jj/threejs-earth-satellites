@@ -58,7 +58,7 @@ export function Earth(props) {
           side={THREE.DoubleSide}
         />
       </mesh>
-      {data.satellites.map(({ satellite: { coordinate: { x, y, z }, id } }, i) => <mesh
+      {data.satellites.map(({ coordinate: { x, y, z }, id }, i) => <mesh
         key={id}
         ref={el => satellitesRef.current[i] = el}
         position={[x, y, z]}>
@@ -68,7 +68,7 @@ export function Earth(props) {
           side={THREE.DoubleSide}
         />
       </mesh>)}
-      {data.satellites.map(({ satellite: { coordinate: { x, y, z }, id } }, i) => <mesh
+      {data.satellites.map(({ coordinate: { x, y, z }, id }, i) => <mesh
         key={id}
         ref={el => usersRef.current[i] = el}
         position={[x, y, z]}>
