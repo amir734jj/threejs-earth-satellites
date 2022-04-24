@@ -7,6 +7,13 @@ import data from "../data.json";
 
 import EarthDayMap from "../assets/img/earth_texture_map_1000px.jpg";
 
+const COLORS = {
+  [0]: 'white',
+  [1]: 'lightgrey',
+  [2]: 'orange',
+  [3]: 'pink'
+}
+
 export function Earth(props) {
   const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(
     TextureLoader,
@@ -71,6 +78,19 @@ export function Earth(props) {
           side={THREE.DoubleSide}
         />
       </mesh>)}
+      {data.mappings.map(({ satellite: satelliteId, user: userId, color }, id) => {
+
+        const satellite = data.satellites.find(s => s.id === satelliteId);
+        const user = data.users.find(u => u.id === userId);
+
+        return <line key={id}
+          points={[
+            [satellite.coordinate.x, satellite.coordinate.y, satellite.coordinate.z],
+            [user.coordinate.x, user.coordinate.y, user.coordinate.z]
+          ]}
+          color={COLORS[color]}
+        />
+      })}
       <mesh ref={earthRef} position={[0, 0, 0]}>
         <sphereGeometry args={[4000, 32, 32]} />
         <meshPhongMaterial specularMap={specularMap} />
