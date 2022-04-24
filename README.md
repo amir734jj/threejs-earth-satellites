@@ -1,6 +1,6 @@
 ## threejs-earth-satellites
 
-Trying to draw earth with bunch of satellites and users
+Trying to draw earth with bunch of satellites and users using React and Three.js
 
 ```shell
 npm install && npm start
