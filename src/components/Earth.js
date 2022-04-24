@@ -106,9 +106,9 @@ export function Earth(props) {
           enableZoom={true}
           enablePan={true}
           enableRotate={true}
-          zoomSpeed={0.6}
-          panSpeed={0.5}
-          rotateSpeed={0.4}
+          zoomSpeed={1}
+          panSpeed={1}
+          rotateSpeed={1}
         />
       </mesh>
     </>
