@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useMemo } from "react";
-import { useLoader, useFrame, useThree } from "@react-three/fiber";
+import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -21,7 +21,7 @@ const SHAPE_RADUS = 25;
 const SHAPE_TEXTURE = 8;
 
 function Line({ start, end, color }) {
-  const points = useMemo(() => [new THREE.Vector3(start.x, start.y, start.z), new THREE.Vector3(end.x, end.y, end.z)], [])
+  const points = useMemo(() => [new THREE.Vector3(start.x, start.y, start.z), new THREE.Vector3(end.x, end.y, end.z)], [start, end])
   const onUpdate = useCallback(self => self.setFromPoints(points), [points])
   return (
     <line position={[0, 0, 0]}>
