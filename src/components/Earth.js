@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { useLoader, useFrame } from "@react-three/fiber";
+import React, { useRef, useCallback, useMemo } from "react";
+import { useLoader, useFrame, useThree } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -9,9 +9,9 @@ import EarthDayMap from "../assets/img/2k_earth_daymap.jpg";
 
 const COLORS = {
   0: 'white',
-  1: 'yellow',
+  1: 'pink',
   2: 'orange',
-  3: 'cyan'
+  3: 'grey'
 };
 
 const EARTH_RADIUS = 6370;
@@ -19,6 +19,17 @@ const EARTH_TEXTURE = 64;
 
 const SHAPE_RADUS = 25;
 const SHAPE_TEXTURE = 8;
+
+function Line({ start, end, color }) {
+  const points = useMemo(() => [new THREE.Vector3(start.x, start.y, start.z), new THREE.Vector3(end.x, end.y, end.z)], [])
+  const onUpdate = useCallback(self => self.setFromPoints(points), [points])
+  return (
+    <line position={[0, 0, 0]}>
+      <bufferGeometry attach="geometry" onUpdate={onUpdate} />
+      <lineBasicMaterial attach="material" color={color} linewidth={3} linecap={'round'} linejoin={'round'} />
+    </line>
+  )
+}
 
 export function Earth(props) {
   const [colorMap, normalMap, specularMap] = useLoader(
@@ -62,17 +73,17 @@ export function Earth(props) {
           rotateSpeed={1}
         />
         <group>
-          {data.users.map(({ coordinate: { x, y, z }, id }, i) =>
-            <mesh
-              key={id}
-              ref={el => usersRef.current[i] = el}
-              position={[x, y, z]}>
-              <sphereGeometry args={[SHAPE_RADUS, SHAPE_TEXTURE, SHAPE_TEXTURE]} />
-              <meshPhongMaterial
-                color='green'
-                side={THREE.DoubleSide}
-              />
-            </mesh>)}
+          {data.users.map(({ coordinate: { x, y, z }, id }, i) => <mesh
+            key={id}
+            ref={el => usersRef.current[i] = el}
+            position={[x, y, z]}>
+            <sphereGeometry args={[SHAPE_RADUS, SHAPE_TEXTURE, SHAPE_TEXTURE]} />
+            <meshPhongMaterial
+              color={data.mappings.find(m => m.user === id) ? "green" : "red"}
+              side={THREE.DoubleSide}
+            />
+          </mesh>
+          )}
         </group>
         <group>
           {data.satellites.map(({ coordinate: { x, y, z }, id }, i) =>
@@ -106,13 +117,7 @@ export function Earth(props) {
             const satellite = data.satellites.find(s => s.id === satelliteId);
             const user = data.users.find(u => u.id === userId);
 
-            return <line key={id}>
-              <bufferGeometry attach="geometry" setFromPoints={[
-                new THREE.Vector3(satellite.coordinate.x, satellite.coordinate.y, satellite.coordinate.z),
-                new THREE.Vector3(user.coordinate.x, user.coordinate.y, user.coordinate.z)
-              ]} />
-              <lineBasicMaterial attach="material" color={COLORS[color]} linewidth={10} linecap={'round'} linejoin={'round'} />
-            </line>
+            return <Line key={id} start={satellite.coordinate} end={user.coordinate} color={COLORS[color]} />
           })}
         </group>
       </mesh>
