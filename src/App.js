@@ -13,7 +13,7 @@ const CanvasContainer = styled.div`
 function App() {
   return (
     <CanvasContainer s>
-      <Canvas camera={{ zoom: 1, position: [8000, 200, 100], far: 20000 }} frameloop="always">
+      <Canvas camera={{ zoom: 1, position: [12000, 0, 5000], far: 20000 }} frameloop="always">
         <Suspense fallback={null}>
           <Earth />
         </Suspense>
