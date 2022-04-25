@@ -8,10 +8,10 @@ import data from "../data.json";
 import EarthDayMap from "../assets/img/2k_earth_daymap.jpg";
 
 const COLORS = {
-  0: 'white',
-  1: 'pink',
-  2: 'orange',
-  3: 'grey'
+  0: 'cyan',
+  1: 'darkyellow',
+  2: 'lightred',
+  3: 'green'
 };
 
 const EARTH_RADIUS = 6370;
@@ -93,7 +93,7 @@ export function Earth(props) {
               position={[x, y, z]}>
               <sphereGeometry args={[SHAPE_RADUS, SHAPE_TEXTURE, SHAPE_TEXTURE]} />
               <meshPhongMaterial
-                color='sienna'
+                color='#A0522D'
                 side={THREE.DoubleSide}
               />
             </mesh>)}
