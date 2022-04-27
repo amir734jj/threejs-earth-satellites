@@ -13,7 +13,8 @@ const COLORS = {
   3: 'green'
 };
 
-const EARTH_RADIUS = 6370;
+// Earth radius in km
+const EARTH_RADIUS = 6371;
 const EARTH_TEXTURE = 64;
 
 const SHAPE_RADUS = 25;

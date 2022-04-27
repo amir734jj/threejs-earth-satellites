@@ -14,7 +14,7 @@ import files from './data';
 
 const canvasStyle = {
   width: '100%',
-  height: '80%',
+  height: '100%',
   backgroundColor: '#01040c'
 };
 
