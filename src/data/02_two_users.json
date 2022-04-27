@@ -1,0 +1,1 @@
+{"users":[{"id":1,"coordinate":{"x":6371.0,"y":0.0,"z":0.0}},{"id":2,"coordinate":{"x":6372.0,"y":0.0,"z":0.0}}],"satellites":[{"id":1,"coordinate":{"x":6921.0,"y":0.0,"z":0.0}}],"interferes":[],"mappings":[{"satellite":1,"beam":1,"user":1,"color":0},{"satellite":1,"beam":2,"user":2,"color":1}]}

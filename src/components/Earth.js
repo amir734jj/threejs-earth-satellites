@@ -3,7 +3,6 @@ import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
-import data from "../data.json";
 
 import EarthDayMap from "../assets/img/2k_earth_daymap.jpg";
 
@@ -31,7 +30,7 @@ function Line({ start, end, color }) {
   )
 }
 
-export function Earth(props) {
+export function Earth({ data }) {
   const [colorMap, normalMap, specularMap] = useLoader(
     TextureLoader,
     [EarthDayMap]
